@@ -29,7 +29,10 @@ class Command(NoArgsCommand):
         rates = rates_result['rates']
         
         for code, rate in rates.iteritems():
-            name = currencies[code]
+            try:
+                name = currencies[code]
+            except KeyError:
+                name = code
             print "Updating %s (%s) to: %s" % (name, code, rate)
             update_currency(code, name, rate, base)
         
